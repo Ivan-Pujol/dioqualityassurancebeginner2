@@ -4,10 +4,14 @@ import com.github.andrelugomes.cities.service.DistanceService;
 import com.github.andrelugomes.cities.service.EarthRadius;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/distances")
@@ -22,15 +26,26 @@ public class DistanceResource {
   }
 
   @GetMapping("/by-points")
-  public Double byPoints(@RequestParam(name = "from") final Long city1,
-                         @RequestParam(name = "to") final Long city2) {
-    log.info("byPoints");
-    return service.distanceByPointsInMiles(city1, city2);
-  }
+  public ResponseEntity byPoints(@RequestParam(name = "from") final Long city1,
+                                 @RequestParam(name = "to") final Long city2) {
+    log.info("byPoints started");
+    ResponseEntity answer;
+    Double result = service.distanceByPointsInMiles(city1, city2);
+    log.info(result.toString());
+    if (result==null){
+      answer = ResponseEntity.badRequest().body("Invalid data. Please check the inputs");
+      return answer;
+    } else {
+      answer = ResponseEntity.ok().body("The disntance between cities is: " + result + " in miles");
+    }
+    return answer;
+
+  };
+
 
   @GetMapping("/by-cube")
   public Double byCube(@RequestParam(name = "from") final Long city1,
-                       @RequestParam(name = "to") final Long city2) {
+                       @RequestParam(name = "to") final Long city2){
     log.info("byCube");
     return service.distanceByCubeInMeters(city1, city2);
   }

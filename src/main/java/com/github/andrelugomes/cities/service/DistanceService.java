@@ -1,12 +1,9 @@
 package com.github.andrelugomes.cities.service;
-
 import static java.lang.Math.atan2;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.sqrt;
 import static java.lang.Math.toRadians;
-
-
 import com.github.andrelugomes.cities.entities.City;
 import com.github.andrelugomes.cities.repositories.CityRepository;
 import com.github.andrelugomes.utils.StringLocationUtils;
@@ -17,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.geo.Point;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class DistanceService {
