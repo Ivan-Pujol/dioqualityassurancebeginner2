@@ -1,3 +1,9 @@
+# DioQABeginner-2Project
+Projeto Final do bootcamp Everis Quality Assurance#2 da DIO.
+
+# O Projeto original é do professor André Luis Gomes!
+https://github.com/andrelugomes/digital-innovation-one.git
+
 # Cities API
 
 ## Requirements
